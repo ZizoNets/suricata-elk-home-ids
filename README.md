@@ -38,7 +38,9 @@ flowchart LR
 3. Filebeat sends `eve.json` to Elasticsearch, and I analyze it in Kibana.
 4. The small screen runs `tail -f /var/log/suricata/fast.log` for a live view.
 
-![fast.log on the sensor's screen](images/fast-log.jpg)
+<img width="1280" height="899" alt="1768061043806" src="https://github.com/user-attachments/assets/d10a3fe8-24d5-41e5-8b12-01a5fa5fa775" />
+
+
 
 ## Why I made these choices
 
@@ -55,7 +57,7 @@ flowchart LR
 
 Even after disabling those categories, many alerts were false positives. The LAN is busy and another homelab on it uses VPNs, so tunnel traffic kept matching rules. That is the main cost of a signature-based IDS on a network like this.
 
-Example from my `fast.log` (2025-11-27): several `ET MALWARE ... Conficker-C P2P` alerts (SIDs 2009205 to 2009208) from a LAN host to `224.0.0.251:5353` (mDNS) and `239.255.255.250:1900` (SSDP). Those destinations are local multicast groups, so I read them as false positives. I did not confirm it with a packet capture.
+Example from my `fast.log` (2025-11-27): several `ET MALWARE ... Conficker-C P2P` alerts (SIDs 2009205 to 2009208) from a LAN host to `224.0.0.251:5353` (mDNS) and `239.255.255.250:1900` (SSDP). Those destinations are local multicast groups, so I read them as false positives...
 
 ## Files
 
