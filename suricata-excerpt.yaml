@@ -1,0 +1,39 @@
+# Relevant parts of /etc/suricata/suricata.yaml. Merge them into the full file.
+# TODO: check against my real file.
+
+vars:
+  address-groups:
+    HOME_NET: "[192.168.1.0/24]"
+    EXTERNAL_NET: "!$HOME_NET"
+
+# Capture from the NIC that receives the mirrored traffic.
+af-packet:
+  - interface: <MONITOR_IFACE>
+    cluster-id: 99
+    cluster-type: cluster_flow
+    defrag: yes
+
+outputs:
+  # One line per alert. Shown on the sensor's screen.
+  - fast:
+      enabled: yes
+      filename: fast.log
+      append: yes
+  # Structured events. Filebeat reads this file.
+  - eve-log:
+      enabled: yes
+      filetype: regular
+      filename: eve.json
+      types:
+        - alert
+        - dns
+        - http
+        - tls
+        - ssh
+        - flow
+
+# Emerging Threats (managed by suricata-update) plus my own rules.
+default-rule-path: /var/lib/suricata/rules
+rule-files:
+  - suricata.rules
+  - /etc/suricata/rules/local.rules

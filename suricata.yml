@@ -1,0 +1,6 @@
+# /etc/filebeat/modules.d/suricata.yml
+# Enable with: sudo filebeat modules enable suricata
+- module: suricata
+  eve:
+    enabled: true
+    var.paths: ["/var/log/suricata/eve.json"]

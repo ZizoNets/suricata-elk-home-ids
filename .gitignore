@@ -1,0 +1,14 @@
+# Secrets and certificates
+*.key
+*.crt
+*.pem
+*.p12
+*.jks
+*keystore*
+.env
+
+# Logs and captures
+*.log
+eve.json
+*.pcap
+*.pcapng

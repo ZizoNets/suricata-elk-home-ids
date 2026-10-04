@@ -1,0 +1,15 @@
+# /etc/filebeat/filebeat.yml
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+
+# Used by "filebeat setup" to load the dashboards.
+setup.kibana:
+  host: "https://<SENSOR_LAN_IP>:5601"
+  ssl.certificate_authorities: ["/etc/filebeat/certs/http_ca.crt"]
+
+# Straight to Elasticsearch, no Logstash.
+output.elasticsearch:
+  hosts: ["https://127.0.0.1:9200"]
+  username: "<FILEBEAT_USER>"
+  password: "${ES_PASSWORD}"      # from the Filebeat keystore
+  ssl.certificate_authorities: ["/etc/filebeat/certs/http_ca.crt"]
