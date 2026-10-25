@@ -38,7 +38,9 @@ flowchart LR
 3. Filebeat sends `eve.json` to Elasticsearch, and I analyze it in Kibana.
 4. The small screen runs `tail -f /var/log/suricata/fast.log` for a live view.
 
-<img width="1280" height="899" alt="1768061043806 (1)" src="https://github.com/user-attachments/assets/067a93d4-b265-4ae4-a265-664e7dc3cf36" />
+<img width="1280" height="899" alt="captura_monitor" src="https://github.com/user-attachments/assets/70697a41-90ae-48d6-b43d-fc5f46bf0b37" />
+
+
 
 
 
