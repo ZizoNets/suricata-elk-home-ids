@@ -305,6 +305,4 @@ They show up in Kibana a few seconds later.
 - Move from IDS to IPS. For now I keep it as IDS to avoid breaking the network by accident.
 - Upgrade the RAM and storage of the mini PC and build more advanced projects on it.
 
-## License
 
-MIT
