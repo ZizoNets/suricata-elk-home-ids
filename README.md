@@ -8,14 +8,7 @@ This is my first homelab project (Homelab v1). I built it in about three weeks w
 >
 > I set this up almost a year ago. Some configuration details may be out of date or contain mistakes, so check them against your own setup before reusing them.
 
-<img width="1280" height="899" alt="1768061043806 (1)" src="https://github.com/user-attachments/assets/f95f35b2-dedd-4bd0-8ec6-7ec01d0f0e4e" />
-
-
-<!-- Ideas for more images (uncomment when the files exist in images/):
-![Kibana dashboard](images/kibana-dashboard.png)
-![Network topology](images/topology.png)
-![Port mirroring on the switch](images/switch-mirroring.png)
--->
+<img width="1280" alt="fast.log capture from the sensor" src="https://github.com/user-attachments/assets/f95f35b2-dedd-4bd0-8ec6-7ec01d0f0e4e" />
 
 ## Overview
 
@@ -32,8 +25,7 @@ This is my first homelab project (Homelab v1). I built it in about three weeks w
 
 ## How it works
 
-<img width="1191" height="683" alt="1768061044390 (1)" src="https://github.com/user-attachments/assets/29c93300-578f-4319-8c22-c559438878c7" />
-
+<img width="1191" alt="Network diagram of the setup" src="https://github.com/user-attachments/assets/29c93300-578f-4319-8c22-c559438878c7" />
 
 1. The switch copies the traffic of the monitored ports to the sensor.
 2. Suricata inspects it and writes alerts to `fast.log` (readable) and `eve.json` (structured).
@@ -66,6 +58,7 @@ Replace the placeholders in `< >`:
 | `<MONITOR_IFACE>` | Capture interface of the sensor |
 | `<SENSOR_LAN_IP>` | LAN address of the sensor |
 | `<FILEBEAT_USER>` | Elasticsearch user for Filebeat |
+| `<TARGET_IP>` | Device you own, used for the test |
 
 Secrets and certificates are not included. Keep passwords and tokens in the keystores, not in the YAML files.
 
@@ -135,8 +128,6 @@ rule-files:
 
 </details>
 
-<!-- CHECK: compare this excerpt with the real /etc/suricata/suricata.yaml (HOME_NET, interface, cluster-id). -->
-
 Create `/etc/suricata/rules/local.rules`. SIDs in the 1000000+ range are reserved for local use.
 
 <details>
@@ -163,9 +154,7 @@ alert tcp $HOME_NET any -> $EXTERNAL_NET 23 (msg:"LOCAL outbound Telnet"; flow:t
 
 </details>
 
-<!-- CHECK: replace with the rules actually deployed on the sensor. -->
-
-Create `/etc/suricata/disable.conf`, which `suricata-update` reads to skip rule groups:
+Create `/etc/suricata/disable.conf`, which `suricata-update` reads to skip rule groups. The block below shows the SCADA/ICS and VoIP groups. Add the other disabled categories (legacy protocols, old exploits, generic encrypted-traffic detections) with the same syntax.
 
 <details>
 <summary><code>disable.conf</code></summary>
@@ -183,8 +172,6 @@ group:emerging-voip.rules
 ```
 
 </details>
-
-<!-- CHECK: add the groups/SIDs disabled for legacy protocols, old exploits and generic encrypted-traffic detections. -->
 
 Download Emerging Threats Open, validate and start:
 
@@ -285,8 +272,6 @@ output.elasticsearch:
 
 </details>
 
-<!-- CHECK: compare the Elasticsearch, Kibana and Filebeat blocks with the real files. -->
-
 Start everything:
 
 ```bash
@@ -314,12 +299,6 @@ sudo tail -f /var/log/suricata/fast.log
 ```
 
 They show up in Kibana a few seconds later.
-
-### 5. Log rotation
-
-Rotation is set to 72 hours.
-
-<!-- TODO: add the config used and what it rotates (Suricata logs with logrotate, Elasticsearch indices, or both). -->
 
 ## Next steps
 
