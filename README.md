@@ -8,7 +8,8 @@ This is my first homelab project (Homelab v1). I built it in about three weeks w
 >
 > I set this up almost a year ago. Some configuration details may be out of date or contain mistakes, so check them against your own setup before reusing them.
 
-![Sensor monitor capture](images/captura_monitor.png)
+<img width="1280" height="899" alt="1768061043806 (1)" src="https://github.com/user-attachments/assets/f95f35b2-dedd-4bd0-8ec6-7ec01d0f0e4e" />
+
 
 <!-- Ideas for more images (uncomment when the files exist in images/):
 ![Kibana dashboard](images/kibana-dashboard.png)
