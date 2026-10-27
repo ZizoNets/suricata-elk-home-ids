@@ -32,23 +32,8 @@ This is my first homelab project (Homelab v1). I built it in about three weeks w
 
 ## How it works
 
-```mermaid
-flowchart LR
-    DEV[LAN devices] --> SW[TP-Link managed switch]
-    SW --> RT[Router]
-    SW -. mirrored traffic .-> SUR
+<img width="1191" height="683" alt="1768061044390 (1)" src="https://github.com/user-attachments/assets/29c93300-578f-4319-8c22-c559438878c7" />
 
-    subgraph SENSOR[Sensor: Fujitsu mini PC]
-        SUR[Suricata] --> FAST[fast.log]
-        SUR --> EVE[eve.json]
-        EVE --> FB[Filebeat]
-        FB --> ES[Elasticsearch<br/>localhost only]
-        ES --> KB[Kibana<br/>HTTPS + auth]
-    end
-
-    FAST --> SCR[Small screen<br/>tail -f]
-    KB --> LAP[Laptop browser]
-```
 
 1. The switch copies the traffic of the monitored ports to the sensor.
 2. Suricata inspects it and writes alerts to `fast.log` (readable) and `eve.json` (structured).
